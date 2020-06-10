@@ -20,7 +20,7 @@ namespace MediatRSample.Controllers
             _mediator = mediator;
         }
         [HttpGet("getorder/{OrderId}")]
-        public async  Task<IActionResult> GetOrder(GetOrderRequest request)
+        public async  Task<IActionResult> GetOrder([FromRoute]GetOrderRequest request)
         {
             var id = RouteData.Values["OrderId"];
             return Ok(await _mediator.Send<List<OrderResponse>>(request));

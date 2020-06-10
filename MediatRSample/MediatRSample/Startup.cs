@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using MediatRSample.PipelineBehavior;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,11 @@ namespace MediatRSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //MediatR registration
             services.AddMediatR(typeof(Startup));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
